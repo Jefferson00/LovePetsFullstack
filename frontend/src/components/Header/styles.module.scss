@@ -1,0 +1,148 @@
+.container{
+    height: 5rem;
+    width: 100%;
+    background-color: #F43434;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10rem;
+    position: fixed;
+    z-index: 5;
+
+    .logoContainer{
+        display: flex;
+
+        div{
+            display: flex;
+            flex-direction: column;
+            margin-left: 2.125rem;
+            flex: 1;
+            justify-content: center;
+            border-left: 1px solid #fff;
+            padding-left: 1rem;
+
+            p{
+                color: #ffffff;
+            }
+            strong{
+                color: #562525;
+                font-size: 1.125rem;
+                line-height: 1.75rem;
+            }
+        }
+    }
+
+    .menuContainer{
+        display: flex;
+        align-items: center;
+        a{
+            color: #ffffff;
+            transition: all 0.2s;
+            text-decoration: none;
+            position: relative;
+            display: flex;
+            align-items: center;
+
+            & + a{
+                margin-left: 1.5rem;
+            }
+
+            &:hover{
+                color: #ffc6c6;
+            }
+
+            span{
+                position: absolute;
+                bottom: 1.85rem;
+                left: 50%;
+                transform: translateX(-50%);
+                visibility: hidden;
+            }
+
+            p{
+                margin-right: 0.75rem;
+                font-weight: 700;
+            }
+
+            &:hover span{
+                visibility: visible;
+            }
+        }
+
+        .closeMenu{
+            display: none;
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+
+            button{
+                border: none;
+                background: transparent;
+                cursor: pointer;
+                color:#fff;
+            }
+        }
+    }
+
+    .menuIcon{
+        display: none;
+    }
+}
+
+@media(max-width: 768px){
+    .container{
+        padding: 0 2rem;
+        .menuContainer{
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity 0.4s;
+
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: #F43434;
+
+            &.menuContainerMobileOpened{
+                visibility: visible;
+                opacity: 1;
+            }
+
+            a{
+                span{
+                    bottom: 3.85rem;
+                }
+
+                & + a {
+                    margin-left: 0;
+                    margin-top: 1.5rem;
+                }
+
+                svg{
+                    height: 50px;
+                    width: 50px;
+                }
+            }
+
+            .closeMenu{
+                display: flex;
+            }
+        }
+
+        .menuIcon{
+            display: flex;
+
+            button{
+                border: none;
+                background: transparent;
+                cursor: pointer;
+
+                color: #fff;
+            }
+        }
+    }
+}

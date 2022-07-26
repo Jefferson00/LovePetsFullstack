@@ -1,0 +1,124 @@
+.container{
+    display: flex;
+    height: 100vh;
+    flex-direction: column;
+    
+    .profileContent{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        flex: 1;
+        padding: 4rem 0;
+        margin-top: 4rem;
+
+        > a{
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.2s;
+            &:first-child{
+                color: #12BABA;
+                display: flex;
+                align-items: center;
+            }
+
+            svg{
+                margin-right: 0.5rem;
+            }
+
+            &:hover{
+                color: #17fafa;
+            }
+        }
+
+        .imageContainer{
+            margin-top: 2rem;
+            display: inline-flex;
+            height: 12rem;
+            width: 12rem;
+            font-size: 0;
+            border-radius: 50%;
+            position: relative;
+
+            img{
+                object-fit: cover;
+                height: 12rem;
+                width: 12rem;
+                border-radius: 50%;
+            }
+
+            label{
+                position: absolute;
+                width: 3rem;
+                height: 3rem;
+                background: #12BABA;
+                border-radius: 50%;
+                right: 0;
+                bottom: 0;
+                transition: background-color 0.2s;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                
+                &:hover{
+                    background: #10a1a1;
+                }
+
+                input{
+                    display: none;
+                }
+            }
+        }
+
+        .linksContainer{
+            margin-top: 2rem;
+            a{
+                text-decoration: none;
+                font-weight: 600;
+                color: #5E5E5E;
+
+                & + a {
+                    margin-left: 2.87rem;
+                }
+
+                &:last-child{
+                    color: #F43434;
+                }
+            }
+        }
+
+        .userInformations{
+            margin-top: 3.36rem;
+
+            .nameContainer{
+                text-align: center;
+                strong{
+                    font-size: 1.5rem;
+                    color: #BA1212;
+                }
+                p{
+                    color: #ABABAB;
+                }
+            }
+
+            .infosContainer{
+                margin-top: 2rem;
+                display: flex;
+                flex-direction: column;
+                span{
+                    display: flex;
+                    align-items: center;
+                    color: #5E5E5E;
+                    p{
+                        margin-left: 1rem;
+                    }
+
+                    & + span{
+                        margin-top: 1rem;
+                    }
+                }
+            }
+        }
+    }
+}
