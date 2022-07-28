@@ -6,24 +6,24 @@ import {
   UpdateDateColumn,
   ManyToOne,
   JoinColumn,
-} from 'typeorm';
+} from "typeorm";
 
-import uploadConfig from '@config/upload';
+import uploadConfig from "@config/upload";
 
-import Pet from './Pet';
+import Pet from "./Pet";
 
-import { Expose } from 'class-transformer';
+import { Expose } from "class-transformer";
 
-@Entity('images')
+@Entity("images")
 class Image {
-  @PrimaryGeneratedColumn('uuid')
+  @PrimaryGeneratedColumn("uuid")
   id: string;
 
   @Column()
   pet_id: string;
 
   @ManyToOne(() => Pet)
-  @JoinColumn({ name: 'pet_id' })
+  @JoinColumn({ name: "pet_id" })
   pet: Pet;
 
   @Column()
@@ -35,16 +35,20 @@ class Image {
   @UpdateDateColumn()
   updated_at: Date;
 
-  @Expose({ name: 'image_url' })
+  @Expose({ name: "image_url" })
   getAvatarUrl(): string | null {
     if (!this.image) {
       return null;
     }
     switch (uploadConfig.driver) {
-      case 'disk':
-        return this.image.startsWith('http') ? this.image : `${process.env.APP_API_URL}/files/${this.image}`
-      case 's3':
+      case "disk":
+        return this.image.startsWith("http")
+          ? this.image
+          : `${process.env.APP_API_URL}/files/${this.image}`;
+      case "s3":
         return `https://${uploadConfig.config.aws.bucket}.s3.amazonaws.com/${this.image}`;
+      case "firebase":
+        return `https://firebasestorage.googleapis.com/v0/b/${process.env.FIREBASE_BUCKET_NAME}/o/${this.image}?alt=media&token=${process.env.FIREBASE_IMAGE_TOKEN}`;
       default:
         return null;
     }

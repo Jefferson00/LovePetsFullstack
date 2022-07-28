@@ -1,86 +1,85 @@
-import { container } from 'tsyringe';
+import { container } from "tsyringe";
 
-import '@modules/users/providers'
-import '@modules/pets/providers'
+import "@modules/users/providers";
+import "@modules/pets/providers";
 
-import mailConfig from '@config/mail';
-import uploadConfig from '@config/upload';
+import mailConfig from "@config/mail";
+import uploadConfig from "@config/upload";
 
-import UsersRepository from '@modules/users/infra/typeorm/repositories/UsersRepository';
-import IUsersRepository from '@modules/users/repositories/IUsersRepository';
+import UsersRepository from "@modules/users/infra/typeorm/repositories/UsersRepository";
+import IUsersRepository from "@modules/users/repositories/IUsersRepository";
 
-import IUserTokensRepository from '@modules/users/repositories/IUserTokensRepository';
-import UserTokensRepository from '@modules/users/infra/typeorm/repositories/UserTokensRepository';
+import IUserTokensRepository from "@modules/users/repositories/IUserTokensRepository";
+import UserTokensRepository from "@modules/users/infra/typeorm/repositories/UserTokensRepository";
 
-import IMailProvaider from './providers/MailProvider/models/IMailProvider';
-import EtherealMailProvider from './providers/MailProvider/implementations/EtherealMailProvider';
-import SESMailProvider from './providers/MailProvider/implementations/SESMailProvider';
+import IMailProvaider from "./providers/MailProvider/models/IMailProvider";
+import EtherealMailProvider from "./providers/MailProvider/implementations/EtherealMailProvider";
+import SESMailProvider from "./providers/MailProvider/implementations/SESMailProvider";
 
-import IMailTemplateProvaider from './providers/MailTemplateProvider/models/IMailTemplateProvider';
-import HandlebarsMailTemplateProvider from './providers/MailTemplateProvider/implementations/HandlebarsMailTemplateProvider';
+import IMailTemplateProvaider from "./providers/MailTemplateProvider/models/IMailTemplateProvider";
+import HandlebarsMailTemplateProvider from "./providers/MailTemplateProvider/implementations/HandlebarsMailTemplateProvider";
 
-import IStorageProvider from './providers/StorageProvider/models/IStorageProvider';
-import DiskStorageProvider from './providers/StorageProvider/implementations/DiskStorageProvider';
-import S3StorageProvider from './providers/StorageProvider/implementations/S3StorageProvider';
+import IStorageProvider from "./providers/StorageProvider/models/IStorageProvider";
+import DiskStorageProvider from "./providers/StorageProvider/implementations/DiskStorageProvider";
+import S3StorageProvider from "./providers/StorageProvider/implementations/S3StorageProvider";
+import FirebaseStorageProvider from "./providers/StorageProvider/implementations/FirebaseStorageProvider";
 
-import IPetsRepository from '@modules/pets/repositories/IPetsRepository';
-import PetsRepository from '@modules/pets/infra/typeorm/repositories/PetsRepository';
+import IPetsRepository from "@modules/pets/repositories/IPetsRepository";
+import PetsRepository from "@modules/pets/infra/typeorm/repositories/PetsRepository";
 
-import IImagesRepository from '@modules/pets/repositories/IImagesRepository';
-import ImagesRepository from '@modules/pets/infra/typeorm/repositories/ImagesRepository';
+import IImagesRepository from "@modules/pets/repositories/IImagesRepository";
+import ImagesRepository from "@modules/pets/infra/typeorm/repositories/ImagesRepository";
 
-import IFavUserPetsRepository from '@modules/pets/repositories/IFavUserPetsRepository';
-import FavUserPetsRepository from '@modules/pets/infra/typeorm/repositories/FavUserPetsRepository';
+import IFavUserPetsRepository from "@modules/pets/repositories/IFavUserPetsRepository";
+import FavUserPetsRepository from "@modules/pets/infra/typeorm/repositories/FavUserPetsRepository";
 
-import ICacheProvider from './providers/CacheProvider/models/ICacheProvider';
-import RedisCacheProvider from './providers/CacheProvider/implementations/RedisCacheProvider';
+import ICacheProvider from "./providers/CacheProvider/models/ICacheProvider";
+import RedisCacheProvider from "./providers/CacheProvider/implementations/RedisCacheProvider";
 
 container.registerSingleton<IUsersRepository>(
-    'UsersRepository',
-    UsersRepository,
+  "UsersRepository",
+  UsersRepository
 );
 
-container.registerSingleton<IPetsRepository>(
-    'PetsRepository',
-    PetsRepository,
-);
+container.registerSingleton<IPetsRepository>("PetsRepository", PetsRepository);
 
 container.registerSingleton<IFavUserPetsRepository>(
-    'FavUserPetsRepository',
-    FavUserPetsRepository,
+  "FavUserPetsRepository",
+  FavUserPetsRepository
 );
 
 container.registerSingleton<IImagesRepository>(
-    'ImagesRepository',
-    ImagesRepository,
+  "ImagesRepository",
+  ImagesRepository
 );
 
 container.registerSingleton<IStorageProvider>(
-    'StorageProvider',
-    uploadConfig.driver === 'disk' ?
-        DiskStorageProvider :
-        S3StorageProvider
-    ,
+  "StorageProvider",
+  uploadConfig.driver === "disk"
+    ? DiskStorageProvider
+    : uploadConfig.driver === "s3"
+    ? S3StorageProvider
+    : FirebaseStorageProvider
 );
 
 container.registerSingleton<IUserTokensRepository>(
-    'UserTokensRepository',
-    UserTokensRepository,
+  "UserTokensRepository",
+  UserTokensRepository
 );
 
 container.registerSingleton<IMailTemplateProvaider>(
-    'MailTemplateProvider',
-    HandlebarsMailTemplateProvider,
+  "MailTemplateProvider",
+  HandlebarsMailTemplateProvider
 );
 
 container.registerInstance<IMailProvaider>(
-    'MailProvider',
-    mailConfig.driver === 'ethereal' ?
-        container.resolve(EtherealMailProvider) :
-        container.resolve(SESMailProvider),
+  "MailProvider",
+  mailConfig.driver === "ethereal"
+    ? container.resolve(EtherealMailProvider)
+    : container.resolve(SESMailProvider)
 );
 
 container.registerSingleton<ICacheProvider>(
-    'CacheProvider',
-    RedisCacheProvider
-)
+  "CacheProvider",
+  RedisCacheProvider
+);

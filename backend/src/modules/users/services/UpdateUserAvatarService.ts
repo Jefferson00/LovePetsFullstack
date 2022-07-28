@@ -1,11 +1,11 @@
-import { injectable, inject } from 'tsyringe';
+import { injectable, inject } from "tsyringe";
 
-import AppError from '@shared/errors/AppError';
+import AppError from "@shared/errors/AppError";
 
-import User from '@modules/users/infra/typeorm/entities/User';
-import IStorageProvider from '@shared/container/providers/StorageProvider/models/IStorageProvider';
-import IUsersRepository from '../repositories/IUsersRepository';
-import ICacheProvider from '@shared/container/providers/CacheProvider/models/ICacheProvider';
+import User from "@modules/users/infra/typeorm/entities/User";
+import IStorageProvider from "@shared/container/providers/StorageProvider/models/IStorageProvider";
+import IUsersRepository from "../repositories/IUsersRepository";
+import ICacheProvider from "@shared/container/providers/CacheProvider/models/ICacheProvider";
 
 interface IRequestDTO {
   user_id: string;
@@ -15,15 +15,15 @@ interface IRequestDTO {
 @injectable()
 export default class UpdateUserAvatarService {
   constructor(
-    @inject('UsersRepository')
+    @inject("UsersRepository")
     private usersRepository: IUsersRepository,
 
-    @inject('StorageProvider')
+    @inject("StorageProvider")
     private storageProvider: IStorageProvider,
 
-    @inject('CacheProvider')
-    private cacheProvider: ICacheProvider,
-  ) { }
+    @inject("CacheProvider")
+    private cacheProvider: ICacheProvider
+  ) {}
 
   public async execute({
     user_id,
@@ -32,7 +32,7 @@ export default class UpdateUserAvatarService {
     const user = await this.usersRepository.findById(user_id);
 
     if (!user) {
-      throw new AppError('Only authenticated users can update avatar.', 401);
+      throw new AppError("Only authenticated users can update avatar.", 401);
     }
 
     if (user.avatar) {

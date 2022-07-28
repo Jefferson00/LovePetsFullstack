@@ -7,6 +7,7 @@ dist
 .env
 coverage
 ormconfig.json
+love-pets-beta-firebase-adminsdk-zynpr-2d03252ffb.json
 
 tmp/*
 !tmp/.gitkeep
