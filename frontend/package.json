@@ -25,15 +25,22 @@
     "react-web-share": "^1.1.0",
     "sass": "^1.33.0",
     "uuidv4": "^6.2.8",
-    "yup": "^0.32.9"
+    "yup": "^0.32.9",
+    "leaflet": "1.7.1",
+    "react-leaflet": "3.1.0"
   },
   "devDependencies": {
     "@types/cookies": "^0.7.6",
     "@types/node": "^15.6.0",
-    "@types/react": "^17.0.6",
+    "@types/react": "17.0.4",
     "@types/react-input-mask": "^3.0.1",
     "@types/react-modal": "^3.12.0",
     "@types/yup": "^0.29.11",
-    "typescript": "^4.2.4"
+    "typescript": "^4.2.4",
+    "@types/leaflet": "1.7.0"
+  },
+  "resolutions": {
+    "@types/react": "17.0.14",
+    "@types/react-dom": "17.0.14"
   }
 }

@@ -1,0 +1,219 @@
+.homeContainer{
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  width: 100%;
+  min-height: 100vh;
+  align-items: center;
+  flex-direction: column;
+  padding: 5rem 0;
+
+  strong {
+    margin-top: 2rem;
+  }
+}
+
+.formContainer{
+  position: relative;
+  border: 1px solid #c4c4c4;
+  border-radius: 20px;
+
+  display: grid;
+  grid-template-columns: 25% 25% 50%;
+    width: 80%;
+    margin: 0 auto;
+    gap: 1rem;
+    padding: 2rem 3rem 5rem;
+  grid-template-areas:
+   "imageContainer speciesContainer ageContainer"
+   "imageContainer speciesContainer genderContainer"
+   "inputsContainer inputsContainer inputsContainer"
+   "locationContainer locationContainer locationContainer"
+}
+
+.imageContainer{
+  grid-area: imageContainer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  font-size: 0;
+  border-radius: 50%;
+  position: relative;
+
+  img{
+      object-fit: cover;
+      height: 12rem;
+      width: 12rem;
+      border-radius: 50%;
+  }
+
+  span{
+    display: flex;
+    gap: 0.5rem;
+    img {
+      object-fit: cover;
+      height: 4.85rem;
+      width:  4.85rem;
+      border-radius: 50%;
+    }
+  }
+
+  label{
+      position: absolute;
+      width: 3rem;
+      height: 3rem;
+      background: #12BABA;
+      border-radius: 50%;
+      right: -10%;
+      bottom: 0;
+      transition: background-color 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      
+      &:hover{
+          background: #10a1a1;
+      }
+
+      input{
+          display: none;
+      }
+  }
+}
+
+.imageWrapper{
+  position: relative;
+
+  button {
+    position: absolute;
+    background: transparent;
+    border: none;
+
+  }
+}
+
+.defaultIcon{
+  background-color: #ebebeb;
+  border-radius: 50%;
+  padding: 0.5rem;
+}
+
+.speciesContainer{
+  grid-area: speciesContainer;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+
+  div {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    button {
+      background: transparent;
+      border: 1px solid #c4c4c4;
+      border-radius: 50%;
+      width: 4.063rem;
+      height: 4.063rem;
+    }
+  }
+}
+
+.ageContainer{
+  grid-area: ageContainer;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  label {
+    color: #12BABA;
+    font-weight: 600;
+  }
+
+  div{
+    display: flex;
+    gap: 0.5rem;
+    button {
+      min-width: 54px;
+      border-radius: 20px;
+      background-color: #B8E4E4;
+      border: none;
+      padding: 0.3rem 0.5rem;
+    }
+  }
+}
+
+.genderContainer {
+  grid-area: genderContainer;
+
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  label {
+    color: #12BABA;
+    font-weight: 600;
+  }
+
+  div {
+    display: flex;
+    gap: 2rem;
+    button {
+      width: 135px;
+      height: 40px;
+      border-radius: 20px;
+      border: none;
+      background-color: #B8E4E4;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.5rem;
+    }
+  }
+}
+
+.inputsContainer{
+  grid-area: inputsContainer;
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+
+  div{
+    margin-top: 0 !important;
+  }
+}
+
+.locationContainer {
+  grid-area: locationContainer;
+
+  label {
+    color: #12BABA;
+    font-weight: 600;
+  }
+}
+
+.buttonContainer{
+  display: flex;
+    justify-content: center;
+    position: absolute;
+    bottom: 0.85rem;
+    z-index: 2;
+    left: 0;
+    right: 0;
+    width: 15rem;
+    margin: 0 auto;
+}
+
+.loadingModalContainer{
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #FFF6F6AA;
+  z-index: 99;
+}

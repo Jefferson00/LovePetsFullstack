@@ -20,6 +20,8 @@ import { api } from "../../services/api";
 import { FormHandles } from "@unform/core";
 import Radio from "../Radio";
 import { ToastContext } from "../../context/ToastContext";
+import { MdEdit } from "react-icons/md";
+import Link from "next/link";
 
 interface FavsData {
   id: string;
@@ -232,9 +234,23 @@ export default function Card({
                 </button>
               )
             ) : (
-              <button onClick={() => onDelete(pet.id)}>
-                <IoMdTrash size={25} color="#F43434" />
-              </button>
+              <div>
+                <button onClick={() => onDelete(pet.id)}>
+                  <IoMdTrash size={25} color="#F43434" />
+                </button>
+                <Link
+                  href={{
+                    pathname: "/pets/new",
+                    query: {
+                      pet: pet.id,
+                    },
+                  }}
+                >
+                  <a>
+                    <MdEdit size={25} color="#129CBA" />
+                  </a>
+                </Link>
+              </div>
             )}
 
             <div className={styles.dotsIndicators}>
