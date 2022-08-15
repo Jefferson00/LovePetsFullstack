@@ -66,7 +66,7 @@ interface IPetImages {
 }
 
 type Specie = "dog" | "cat" | "rodent" | "rabbit" | "fish" | "others";
-type Age = "- 1 ano" | "1 ano" | "2 anos" | "3 anos" | "4 anos" | "+ 4 anos";
+type Age = "- 1 ano" | "1 ano" | "2 anos" | "3 anos" | "+ 3 anos";
 type Gender = "male" | "female";
 
 export default function Home(props: HomeProps) {

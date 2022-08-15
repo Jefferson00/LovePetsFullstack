@@ -61,7 +61,7 @@ interface IPetImages {
 }
 
 type Specie = "dog" | "cat" | "rodent" | "rabbit" | "fish" | "others";
-type Age = "- 1 ano" | "1 ano" | "2 anos" | "3 anos" | "4 anos" | "+ 4 anos";
+type Age = "- 1 ano" | "1 ano" | "2 anos" | "3 anos" | "+ 3 anos";
 type Gender = "male" | "female";
 
 type FormData = {
@@ -190,11 +190,19 @@ export default function Card({
     }
   }, [imageContainer.current, currentImageIndex]);
 
+  const ageTranslate = (age: Age) => {
+    if (age === "- 1 ano") return "menos de 1 ano";
+    if (age === "+ 3 anos") return "mais de 3 anos";
+    return null;
+  };
+
   return (
     <>
       <div className={styles.card} key={pet.id}>
         <header>
-          <span>{pet.age}</span>
+          <span style={{ fontSize: ageTranslate(pet.age) && "0.75rem" }}>
+            {ageTranslate(pet.age) ? ageTranslate(pet.age) : pet.age}
+          </span>
           <strong>{pet.name}</strong>
           {pet.gender === "female" ? (
             <IoMdFemale size={25} color="#ED9090" />
@@ -307,7 +315,11 @@ export default function Card({
                 </div>
 
                 <div className={styles.locationInfoContainer}>
-                  <span>{pet.distanceLocation} km</span>
+                  <span>
+                    {pet.distanceLocation === 0
+                      ? "menos de 1km"
+                      : `${pet.distanceLocation} km`}
+                  </span>
                   <span>{pet.distanceTime}</span>
                 </div>
               </div>
