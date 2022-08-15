@@ -22,55 +22,15 @@ import Radio from "../Radio";
 import { ToastContext } from "../../context/ToastContext";
 import { MdEdit } from "react-icons/md";
 import Link from "next/link";
-
-interface FavsData {
-  id: string;
-  user_id: string;
-  pet_id: string;
-  pet: Pets;
-}
-
-interface Pets {
-  id: string;
-  name: string;
-  user_id: string;
-  species: Specie;
-  is_adopt: boolean;
-  age: Age;
-  gender: Gender;
-  description: string;
-  location_lat: string;
-  location_lon: string;
-  distanceLocation: number;
-  distanceTime: string;
-  city: string;
-  state: string;
-  created_at: Date;
-  updated_at: Date;
-  user_name: string;
-  user_phone: string;
-  user_avatar: string;
-  images: IPetImages[];
-}
-
-interface IPetImages {
-  id: string | null;
-  pet_id: string;
-  image: string;
-  image_url: string | null;
-}
-
-type Specie = "dog" | "cat" | "rodent" | "rabbit" | "fish" | "others";
-type Age = "- 1 ano" | "1 ano" | "2 anos" | "3 anos" | "+ 3 anos";
-type Gender = "male" | "female";
+import { IAge, IFavsData, IPets } from "../../utils/interfaces";
 
 type FormData = {
   denuncia: string;
 };
 
 interface CardProps {
-  pet: Pets;
-  fav?: FavsData;
+  pet: IPets;
+  fav?: IFavsData;
   itsMyPet?: boolean;
   itsFav?: boolean;
   onDelete?: (id: string) => Promise<void>;
@@ -190,7 +150,7 @@ export default function Card({
     }
   }, [imageContainer.current, currentImageIndex]);
 
-  const ageTranslate = (age: Age) => {
+  const ageTranslate = (age: IAge) => {
     if (age === "- 1 ano") return "menos de 1 ano";
     if (age === "+ 3 anos") return "mais de 3 anos";
     return null;

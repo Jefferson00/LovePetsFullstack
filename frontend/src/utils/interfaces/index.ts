@@ -44,3 +44,10 @@ export interface IPets {
   user_avatar: string;
   images: IPetImages[];
 }
+
+export interface IFavsData {
+  id: string;
+  user_id: string;
+  pet_id: string;
+  pet: IPets;
+}

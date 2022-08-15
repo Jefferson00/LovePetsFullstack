@@ -10,44 +10,11 @@ import Header from "../../components/Header";
 
 import styles from "./styles.module.scss";
 import Default from "../../components/Default";
+import { IPetImages, IPets } from "../../utils/interfaces";
 
 interface PetsProps {
-  pets: Pets;
+  pets: IPets;
 }
-
-interface Pets {
-  id: string;
-  name: string;
-  user_id: string;
-  species: Specie;
-  is_adopt: boolean;
-  age: Age;
-  gender: Gender;
-  description: string;
-  location_lat: string;
-  location_lon: string;
-  city: string;
-  state: string;
-  distanceLocation: number;
-  distanceTime: string;
-  created_at: Date;
-  updated_at: Date;
-  user_name: string;
-  user_phone: string;
-  user_avatar: string;
-  images: IPetImages[];
-}
-
-interface IPetImages {
-  id: string | null;
-  pet_id: string;
-  image: string;
-  image_url: string | null;
-}
-
-type Specie = "dog" | "cat" | "rodent" | "rabbit" | "fish" | "others";
-type Age = "- 1 ano" | "1 ano" | "2 anos" | "3 anos" | "+ 3 anos";
-type Gender = "male" | "female";
 
 export default function Pets(props: PetsProps) {
   return (
@@ -65,10 +32,10 @@ export default function Pets(props: PetsProps) {
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { slug } = context.params;
-  let pets: Pets = null;
+  let pets: IPets = null;
   const apiClient = getAPIClient(context);
 
-  const setPetImages = async (pets: Pets): Promise<Pets> => {
+  const setPetImages = async (pets: IPets): Promise<IPets> => {
     let petsWithImages = Object.assign({}, pets);
     petsWithImages.images = await findPetImages(pets.id);
     petsWithImages.distanceLocation = getDistanceLocation({

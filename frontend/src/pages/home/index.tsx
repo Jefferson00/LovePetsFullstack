@@ -23,59 +23,19 @@ import {
 
 import IcPets from "../../components/Icons/IcPets";
 import Default from "../../components/Default";
+import { IFavsData, IPetImages, IPets } from "../../utils/interfaces";
 
 interface HomeProps {
-  pets: Pets[];
+  pets: IPets[];
 }
-
-interface FavsData {
-  id: string;
-  user_id: string;
-  pet_id: string;
-  pet: Pets;
-}
-
-interface Pets {
-  id: string;
-  name: string;
-  user_id: string;
-  species: Specie;
-  is_adopt: boolean;
-  age: Age;
-  gender: Gender;
-  description: string;
-  location_lat: string;
-  location_lon: string;
-  city: string;
-  state: string;
-  distanceLocation: number;
-  distanceTime: string;
-  created_at: Date;
-  updated_at: Date;
-  user_name: string;
-  user_phone: string;
-  user_avatar: string;
-  images: IPetImages[];
-}
-
-interface IPetImages {
-  id: string | null;
-  pet_id: string;
-  image: string;
-  image_url: string | null;
-}
-
-type Specie = "dog" | "cat" | "rodent" | "rabbit" | "fish" | "others";
-type Age = "- 1 ano" | "1 ano" | "2 anos" | "3 anos" | "+ 3 anos";
-type Gender = "male" | "female";
 
 export default function Home(props: HomeProps) {
   const { user } = useContext(AuthContext);
   const filterContainerRef = useRef<HTMLDivElement>(null);
   const filterContentRef = useRef<HTMLDivElement>(null);
   const [filterOptionsOpened, setFilterOptionsOpened] = useState(false);
-  const [pets, setPets] = useState<Pets[]>([]);
-  const [myFavs, setMyFavs] = useState<FavsData[]>([]);
+  const [pets, setPets] = useState<IPets[]>([]);
+  const [myFavs, setMyFavs] = useState<IFavsData[]>([]);
   const [page, setPage] = useState(2);
   const [currentLatitude, setCurrentLatitude] = useState(() => {
     const { ["@LovePetsBeta:location_latitude"]: latitude } = parseCookies();
@@ -92,9 +52,9 @@ export default function Home(props: HomeProps) {
   const [hasMoreResults, setHasMoreResults] = useState(true);
   const [loading, setLoading] = useState(false);
 
-  let petsArr: Pets[] = [];
+  let petsArr: IPets[] = [];
 
-  const setPetImages = async (petsArr: Pets[]): Promise<Pets[]> => {
+  const setPetImages = async (petsArr: IPets[]): Promise<IPets[]> => {
     const mapPromises = petsArr.map(async (pet) => {
       let petsWithImages = Object.assign({}, pet);
       petsWithImages.images = await findPetImages(pet.id);
@@ -411,7 +371,7 @@ export default function Home(props: HomeProps) {
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  let petsArr: Pets[] = [];
+  let petsArr: IPets[] = [];
 
   const { ["@LovePetsBeta:location_latitude"]: latitude } =
     parseCookies(context);
@@ -429,7 +389,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     currrent_longitude = longitude;
   }
 
-  const setPetImages = async (petsArr: Pets[]): Promise<Pets[]> => {
+  const setPetImages = async (petsArr: IPets[]): Promise<IPets[]> => {
     const mapPromises = petsArr.map(async (pet) => {
       let petsWithImages = Object.assign({}, pet);
       petsWithImages.images = await findPetImages(pet.id);

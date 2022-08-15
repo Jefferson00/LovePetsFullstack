@@ -9,54 +9,14 @@ import { parseCookies } from "nookies";
 import getDistanceLocation from "../../../utils/getDistanceLocation";
 import getDistanceTime from "../../../utils/getDistanceTime";
 import styles from "./styles.module.scss";
+import { IFavsData, IPetImages, IPets } from "../../../utils/interfaces";
 
 interface HomeProps {
-  favs: FavsData[];
+  favs: IFavsData[];
 }
-
-interface FavsData {
-  id: string;
-  user_id: string;
-  pet_id: string;
-  pet: Pets;
-}
-
-interface Pets {
-  id: string;
-  name: string;
-  user_id: string;
-  species: Specie;
-  is_adopt: boolean;
-  age: Age;
-  gender: Gender;
-  description: string;
-  location_lat: string;
-  location_lon: string;
-  city: string;
-  state: string;
-  distanceLocation: number;
-  distanceTime: string;
-  created_at: Date;
-  updated_at: Date;
-  user_name: string;
-  user_phone: string;
-  user_avatar: string;
-  images: IPetImages[];
-}
-
-interface IPetImages {
-  id: string | null;
-  pet_id: string;
-  image: string;
-  image_url: string | null;
-}
-
-type Specie = "dog" | "cat" | "rodent" | "rabbit" | "fish" | "others";
-type Age = "- 1 ano" | "1 ano" | "2 anos" | "3 anos" | "4 anos" | "+ 4 anos";
-type Gender = "male" | "female";
 
 export default function MyFavs(props: HomeProps) {
-  const [myFavs, setMyFavs] = useState<FavsData[]>([]);
+  const [myFavs, setMyFavs] = useState<IFavsData[]>([]);
 
   const handleDeleteFavPet = async (id: string) => {
     try {
@@ -94,7 +54,7 @@ export default function MyFavs(props: HomeProps) {
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  let petsArr: FavsData[] = [];
+  let petsArr: IFavsData[] = [];
   const apiClient = getAPIClient(context);
 
   const { ["@LovePetsBeta:token"]: token } = parseCookies(context);
@@ -108,7 +68,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     };
   }
 
-  const setPetImages = async (petsArr: FavsData[]): Promise<FavsData[]> => {
+  const setPetImages = async (petsArr: IFavsData[]): Promise<IFavsData[]> => {
     const mapPromises = petsArr.map(async (fav) => {
       let petsWithImages = Object.assign({}, fav);
       petsWithImages.pet.images = await findPetImages(fav.pet.id);
