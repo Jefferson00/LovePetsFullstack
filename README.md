@@ -1,5 +1,5 @@
 <h3 align="center">
-  <img alt="Lovepets" title="Lovepets" src=".github/logo.svg" height="100px" width="100px"/>
+  <img alt="Lovepets" title="Lovepets" src="frontend/.github/logo.svg" height="100px" width="100px"/>
 </h3>
 
 <h2 align="center">
@@ -19,7 +19,7 @@
 </p>
 
 <p align="center">
-  <img src="./frontend/github/preview.png">
+  <img src="/frontend/.github/preview.png">
 </p>
 
 ## 💻 Projeto
@@ -28,20 +28,20 @@ Love pets: amor aos animais, é um projeto que tem como ideia conectar pessoas q
 
 ## 🚀 Tecnologias
 
-# Web
+### Web
 
 - [TypeScript](https://www.typescriptlang.org/)
 - [ReactJS](https://reactjs.org/)
 - [NextJS](https://nextjs.org/)
 - [Scss](https://sass-lang.com/)
 
-# Mobile
+### Mobile
 
 - [React Native](https://reactnative.dev/)
 - [TypeScript](https://www.typescriptlang.org/)
 - [Styled Components](https://www.styled-components.com/)
 
-# Backend
+### Backend
 
 - [Node.js](https://nodejs.org/en/)
 - [Express](https://expressjs.com/pt-br/)
